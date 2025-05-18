@@ -11,12 +11,6 @@ The **Travel Log App** is a Django-based web application that allows users to cr
 - 📦 Easily extensible for dashboards, maps, budgets, etc.
 
 
-## 📸 Screenshots
-
-> _Include screenshots of the app UI (like the create trip page)._  
-> For example:  
-> ![Create Trip Page](screenshots/create_trip.png)
-
 
 ## 🛠 Tech Stack
 
