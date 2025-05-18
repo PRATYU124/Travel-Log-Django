@@ -1,0 +1,39 @@
+.custom-form {
+    background-color:skyblue;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: auto;
+}
+
+.custom-form input,
+.custom-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0 20px 0;
+    border: 1px solid #ccc !important;
+    border-radius: 4px;
+    font-size: 15px;
+    box-shadow: none !important;
+}
+
+.custom-form textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.custom-form button {
+    background-color: #28a745 !important;
+    color: white;
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.custom-form button:hover {
+    background-color: #218838 !important;
+}

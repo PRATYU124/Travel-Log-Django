@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'trips/styles.css' %}">
+</head>
+<body>
+    <h1>Welcome to the Dashboard</h1>
+    <p>This is the dashboard page after creating a trip.</p>
+    
+    <p><a href="/create">Create another trip</a></p>
+    <p><a href="/trip/1/map/">View Trip Map</a></p> <!-- TODO: Replace 1 with dynamic ID -->
+
+    <ul>
+    {% for trip in trips %}
+        <li>
+            {{ trip.destination }} on {{ trip.start_date }}
+            - <a href="{% url 'trip_map' trip.id %}">View Map</a>
+        </li>
+    {% empty %}
+        <li>No trips available yet.</li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>

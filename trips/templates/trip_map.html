@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ trip.title }} - Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>#map { height: 500px; }</style>
+</head>
+<body>
+    <h1>{{ trip.title }}</h1>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+    const destinations = JSON.parse('{{ destinations_json|escapejs }}');
+
+    if (destinations.length > 0) {
+        const map = L.map('map').setView(
+            [destinations[0].latitude, destinations[0].longitude], 6
+        );
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        destinations.forEach(place => {
+            L.marker([place.latitude, place.longitude])
+                .addTo(map)
+                .bindPopup(`<b>${place.name}</b><br>${place.description}`);
+        });
+    } else {
+        document.getElementById("map").innerHTML = "<p>No destinations available.</p>";
+    }
+    </script>
+    
+    <h3>Hotel Price Calculator</h3>
+<form method="post">
+    {% csrf_token %}
+    <label for="price">Price per Night ($):</label>
+    <input type="number" id="price" name="price" step="0.01" required><br><br>
+
+    <label for="nights">Number of Nights:</label>
+    <input type="number" id="nights" name="nights" required><br><br>
+
+    <button type="submit">Calculate</button>
+</form>
+
+{% if total_price %}
+    <p><strong>Total Cost: ${{ total_price }}</strong></p>
+{% endif %}
+</script>
+<script>
+document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent actual form submission
+
+    const price = parseFloat(document.getElementById('price').value);
+    const nights = parseInt(document.getElementById('nights').value);
+
+    if (!isNaN(price) && !isNaN(nights)) {
+        const total = price * nights;
+        // Display result below form
+        const resultArea = document.createElement("p");
+        resultArea.innerHTML = `<strong>Total Cost: $${total.toFixed(2)}</strong>`;
+        this.after(resultArea);
+    } else {
+        alert("Please enter valid values.");
+    }
+});
+</script>
+
+
+</body>
+</html>
+
